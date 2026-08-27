@@ -1,0 +1,22 @@
+[build]
+  publish = "."
+[[redirects]]
+  from = "/pages/vietnam-mobile-internet"
+  to = "/legacy.html"
+  status = 200
+[[redirects]]
+  from = "/pages/travel-platforms-vietnam"
+  to = "/legacy.html"
+  status = 200
+[[redirects]]
+  from = "/pages/google-map-review"
+  to = "/legacy.html"
+  status = 200
+[[redirects]]
+  from = "/pages/greentours-vietnam"
+  to = "/legacy.html"
+  status = 200
+[[redirects]]
+  from = "/content/*"
+  to = "/legacy.html"
+  status = 200
