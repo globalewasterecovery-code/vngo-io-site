@@ -1,0 +1,71 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>社区 | VNGO</title><meta name="description" content="在 VNGO 社区发布越南行程需求、招募旅伴、寻求本地合作或分享出行经验。"><link rel="stylesheet" href="/assets/site.css">
+<style>
+.community-wrap{padding:48px 0 72px}
+.community-wrap h1{margin:0 0 8px;font-size:32px;letter-spacing:-.02em}
+.post-form{background:#fff;border:1px solid #dfe5e0;border-radius:16px;padding:24px;box-shadow:0 12px 30px rgba(16,37,30,.06);display:grid;gap:12px;margin:24px 0 40px}
+.post-form input,.post-form textarea,.post-form select{width:100%;padding:12px;border-radius:8px;border:1px solid #cdd6d0;font:inherit}
+.post-form button{padding:12px;border-radius:8px;border:1px solid var(--green);background:var(--green);color:#fff;font-weight:700;cursor:pointer}
+.msg{font-size:.85rem;min-height:1.1em}
+.msg.err{color:#b23b3b}
+.msg.ok{color:#1f7a4c}
+.post-item{border:1px solid #dfe5e0;border-radius:12px;padding:18px;margin-bottom:14px;background:#fff}
+.post-item h3{margin:0 0 6px}
+.post-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.tag-pill{font-size:.72rem;font-weight:700;color:var(--green);background:#e7efe9;padding:3px 9px;border-radius:999px}
+.post-body{white-space:pre-wrap;word-break:break-word;margin:0 0 10px}
+.post-meta{font-size:.8rem;color:var(--muted)}
+.post-actions{margin-left:8px}
+.post-action{background:none;border:none;color:var(--green);font-weight:700;cursor:pointer;padding:0 4px;font-size:.8rem}
+.empty{color:var(--muted)}
+.login-hint{background:#fbf3e3;border-left:4px solid var(--gold);padding:14px 16px;border-radius:5px;color:#6b5220;margin:20px 0}
+</style>
+</head><body>
+<header><div class="wrap nav"><a class="brand" href="/">VN<span>GO</span><small>越南在地行程设计</small></a><button class="menu" aria-label="打开导航" aria-expanded="false">☰</button><nav><a href="/#golf">高尔夫</a><a href="/#team">企业团建</a><a href="/community/">社区</a><span id="authState" style="font-size:14px"></span><a href="/#inquiry" class="nav-cta">定制行程</a></nav></div></header>
+<main class="wrap community-wrap">
+  <h1>VNGO 社区</h1>
+  <p style="color:var(--muted);max-width:640px">发布你的越南行程需求（比如招募高尔夫搭子、寻找团建场地建议），或者作为本地供应商/地接伙伴发布合作信息，也欢迎分享真实的出行交流。</p>
+
+  <div id="loginHint" class="login-hint" style="display:none">请先<a href="/login/">登录</a>或<a href="/signup/">注册</a>后再发布。</div>
+
+  <form class="post-form" id="postForm">
+    <select id="postCategory" required>
+      <option value="">— 选择类型 —</option>
+      <option value="需求">需求（招募旅伴 / 寻求行程建议）</option>
+      <option value="合作">合作（本地供应商 / 地接伙伴对接）</option>
+      <option value="交流">交流（出行经验 / 真实反馈）</option>
+    </select>
+    <input id="postTitle" type="text" maxlength="120" placeholder="标题（例如：招募10月岘港高尔夫3人拼团）" />
+    <textarea id="postBody" rows="4" required placeholder="详细说明：目的地、时间、人数、诉求或合作方式…"></textarea>
+    <button type="submit">发布</button>
+    <p class="msg" id="postMsg"></p>
+  </form>
+
+  <div id="postList"><p class="empty">加载中…</p></div>
+</main>
+<footer><div class="wrap"><div class="brand">VN<span>GO</span></div><p>越南高端地接 · 高尔夫旅行 · 企业团建</p><p>© <span id="year"></span> VNGO.io</p></div></footer>
+<script>const b=document.querySelector('.menu'),n=document.querySelector('nav');b.onclick=()=>{const o=n.classList.toggle('open');b.setAttribute('aria-expanded',o)};document.querySelector('#year').textContent=new Date().getFullYear();</script>
+<script type="module">
+  import { getSession, renderAuthState, fetchPosts, renderPostList, wirePostForm } from '/js/community.js';
+
+  const TARGET = 'community';
+
+  async function refreshList() {
+    const posts = await fetchPosts({ kind: 'board', target: TARGET, limit: 100 });
+    renderPostList('postList', posts, { emptyText: '还没有内容，来写第一条吧。', showTitle: true });
+  }
+
+  async function main() {
+    const session = await renderAuthState('authState');
+    const form = document.getElementById('postForm');
+    const hint = document.getElementById('loginHint');
+    if (!session || !session.user) {
+      form.style.display = 'none';
+      hint.style.display = 'block';
+    }
+    wirePostForm({ formId: 'postForm', msgId: 'postMsg', kind: 'board', target: TARGET, onSuccess: refreshList });
+    await refreshList();
+  }
+
+  main();
+</script>
+</body></html>

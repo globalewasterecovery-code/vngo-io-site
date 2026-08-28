@@ -1,0 +1,112 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>注册 | VNGO</title><meta name="description" content="注册 VNGO 账号，参与需求发布、合作与交流社区。"><link rel="stylesheet" href="/assets/site.css">
+<style>
+.auth-wrap{width:min(28rem,calc(100% - 40px));margin:0 auto;padding:64px 0}
+.auth-wrap h1{margin:0 0 8px;font-size:32px;letter-spacing:-.02em}
+.auth-box{background:#fff;border:1px solid #dfe5e0;border-radius:16px;padding:26px;box-shadow:0 12px 30px rgba(16,37,30,.06);display:grid;gap:12px}
+.auth-box input,.auth-box button{width:100%;padding:12px;border-radius:8px;border:1px solid #cdd6d0;font:inherit}
+.auth-box button[type=submit],.auth-box button.oauth{background:var(--green);color:#fff;border-color:var(--green);font-weight:700;cursor:pointer}
+.auth-box button.oauth.alt{background:#fff;color:var(--ink);border-color:#cdd6d0}
+.auth-box .hint{font-size:.8rem;color:var(--muted)}
+.auth-box .msg{font-size:.85rem;min-height:1.1em}
+.auth-box .msg.err{color:#b23b3b}
+.auth-box .msg.ok{color:#1f7a4c}
+.switch{font-size:.85rem;color:var(--muted);text-align:center}
+</style>
+</head><body>
+<header><div class="wrap nav"><a class="brand" href="/">VN<span>GO</span><small>越南在地行程设计</small></a><nav><a href="/#golf">高尔夫</a><a href="/#team">企业团建</a><a href="/community/">社区</a><a href="/#inquiry" class="nav-cta">定制行程</a></nav></div></header>
+<main class="wrap auth-wrap">
+  <h1>注册</h1>
+  <p class="hint" style="margin-bottom:20px">只需要昵称和邮箱验证码，不用设密码。</p>
+  <div class="auth-box">
+    <button type="button" class="oauth" id="oauthGoogle">使用 Google 继续</button>
+    <button type="button" class="oauth alt" id="oauthApple">使用 Apple 继续</button>
+    <p class="msg" id="oauthMsg"></p>
+  </div>
+  <p class="hint" style="text-align:center;margin:16px 0">或使用邮箱验证码（备用）</p>
+  <form class="auth-box" id="step1Form">
+    <div>
+      <label class="hint" for="displayName">昵称</label>
+      <input id="displayName" name="displayName" type="text" required maxlength="40" />
+    </div>
+    <div>
+      <label class="hint" for="email">邮箱</label>
+      <input id="email" name="email" type="email" required />
+    </div>
+    <button type="submit" id="step1Btn">发送验证码</button>
+    <p class="msg" id="step1Msg"></p>
+  </form>
+  <form class="auth-box" id="step2Form" style="display:none;margin-top:12px">
+    <p class="hint">验证码已发送到邮箱，5-10分钟内有效。</p>
+    <div>
+      <label class="hint" for="code">6位验证码</label>
+      <input id="code" name="code" type="text" inputmode="numeric" required maxlength="8" />
+    </div>
+    <button type="submit" id="step2Btn">验证并加入</button>
+    <p class="msg" id="step2Msg"></p>
+  </form>
+  <p class="switch" style="margin-top:14px">已经有账号？<a href="/login/">去登录</a></p>
+</main>
+<footer><div class="wrap"><div class="brand">VN<span>GO</span></div><p>© <span id="year"></span> VNGO.io</p></div></footer>
+<script type="module">
+  import { supabase } from '/js/supabase-client.js';
+  (async () => {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (session && session.user) { window.location.replace('/community/'); }
+  })();
+  document.getElementById('oauthGoogle').addEventListener('click', () => oauthSignIn('google'));
+  document.getElementById('oauthApple').addEventListener('click', () => oauthSignIn('apple'));
+  async function oauthSignIn(provider) {
+    const msg = document.getElementById('oauthMsg');
+    msg.textContent = ''; msg.className = 'msg';
+    const { error } = await supabase.auth.signInWithOAuth({ provider, options: { redirectTo: window.location.origin + '/community/' } });
+    if (error) { msg.textContent = '登录失败：' + error.message; msg.className = 'msg err'; }
+  }
+
+  let pendingEmail = '';
+  const step1Form = document.getElementById('step1Form');
+  const step2Form = document.getElementById('step2Form');
+  const step1Msg = document.getElementById('step1Msg');
+  const step2Msg = document.getElementById('step2Msg');
+
+  step1Form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    step1Msg.textContent = ''; step1Msg.className = 'msg';
+    const btn = document.getElementById('step1Btn');
+    btn.disabled = true;
+    const displayName = document.getElementById('displayName').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const { error } = await supabase.auth.signInWithOtp({
+      email,
+      options: { shouldCreateUser: true, data: { display_name: displayName } },
+    });
+    btn.disabled = false;
+    if (error) {
+      step1Msg.textContent = '发送失败：' + error.message;
+      step1Msg.className = 'msg err';
+      return;
+    }
+    pendingEmail = email;
+    step1Msg.textContent = '验证码已发送，请查收邮箱。';
+    step1Msg.className = 'msg ok';
+    step2Form.style.display = 'grid';
+  });
+
+  step2Form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    step2Msg.textContent = ''; step2Msg.className = 'msg';
+    const btn = document.getElementById('step2Btn');
+    btn.disabled = true;
+    const code = document.getElementById('code').value.trim();
+    const { error } = await supabase.auth.verifyOtp({ email: pendingEmail, token: code, type: 'email' });
+    btn.disabled = false;
+    if (error) {
+      step2Msg.textContent = '验证失败：' + error.message;
+      step2Msg.className = 'msg err';
+      return;
+    }
+    step2Msg.textContent = '加入成功！正在跳转…';
+    step2Msg.className = 'msg ok';
+    setTimeout(() => { window.location.href = '/community/'; }, 800);
+  });
+</script>
+</body></html>
