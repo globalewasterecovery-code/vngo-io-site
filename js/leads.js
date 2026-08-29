@@ -16,22 +16,28 @@ function utmCampaign() {
   try { return new URLSearchParams(window.location.search).get('utm_campaign') || null; } catch (e) { return null; }
 }
 
+function boundedText(value, max) {
+  if (value == null) return null;
+  var text = String(value).trim();
+  return text ? text.slice(0, max) : null;
+}
+
 export async function submitLead(opts) {
   var f = (opts && opts.fields) || {};
   var record = {
     site: 'vngo',
-    source_page: window.location.pathname,
-    source_campaign: utmCampaign(),
-    language: currentLanguage(),
-    country: f.country || null,
-    name: f.name || null,
-    contact_type: f.contact_type || null,
-    contact_value: f.contact_value || null,
+    source_page: boundedText(window.location.pathname, 500),
+    source_campaign: boundedText(utmCampaign(), 200),
+    language: boundedText(currentLanguage(), 35),
+    country: boundedText(f.country, 100),
+    name: boundedText(f.name, 200),
+    contact_type: boundedText(f.contact_type, 50),
+    contact_value: boundedText(f.contact_value, 320),
     travel_date: f.travel_date || null,
     party_size: f.party_size ? parseInt(f.party_size, 10) : null,
-    service_type: f.service_type || null,
-    budget_range: f.budget_range || null,
-    message: f.message || null,
+    service_type: boundedText(f.service_type, 100),
+    budget_range: boundedText(f.budget_range, 100),
+    message: boundedText(f.message, 5000),
     status: 'new',
   };
 

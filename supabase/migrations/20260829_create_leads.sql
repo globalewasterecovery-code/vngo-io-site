@@ -7,18 +7,18 @@ create extension if not exists pgcrypto;
 create table if not exists public.leads (
   lead_id uuid primary key default gen_random_uuid(),
   site text not null default 'vngo',
-  source_page text,
-  source_campaign text,
-  language text,
-  country text,
-  name text not null,
-  contact_type text not null,
-  contact_value text not null,
+  source_page text check (char_length(source_page) <= 500),
+  source_campaign text check (char_length(source_campaign) <= 200),
+  language text check (char_length(language) <= 35),
+  country text check (char_length(country) <= 100),
+  name text not null check (char_length(name) between 1 and 200),
+  contact_type text not null check (char_length(contact_type) between 1 and 50),
+  contact_value text not null check (char_length(contact_value) between 1 and 320),
   travel_date date,
-  party_size int,
-  service_type text not null,
-  budget_range text,
-  message text,
+  party_size int check (party_size between 1 and 10000),
+  service_type text not null check (char_length(service_type) between 1 and 100),
+  budget_range text check (char_length(budget_range) <= 100),
+  message text check (char_length(message) <= 5000),
   created_at timestamptz not null default now(),
   status text not null default 'new'
     check (status in ('new','qualified','contacted','quoted','won','lost','spam'))
@@ -35,7 +35,7 @@ drop policy if exists "public can insert leads" on public.leads;
 create policy "public can insert leads"
   on public.leads for insert
   to anon
-  with check (true);
+  with check (site = 'vngo' and status = 'new');
 
 -- Do not grant read/update access to the generic authenticated role: community
 -- accounts use that role too. Leads remain manageable from the Supabase
