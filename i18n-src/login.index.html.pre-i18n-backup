@@ -1,4 +1,4 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>登录 | VNGO</title><meta name="description" content="登录 VNGO 账号，参与需求发布、合作与交流社区。"><link rel="stylesheet" href="/assets/site.css"><link rel="stylesheet" href="/css/i18n.css">
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>登录 | VNGO</title><meta name="description" content="登录 VNGO 账号，参与需求发布、合作与交流社区。"><link rel="stylesheet" href="/assets/site.css">
 <style>
 .auth-wrap{width:min(28rem,calc(100% - 40px));margin:0 auto;padding:64px 0}
 .auth-wrap h1{margin:0 0 8px;font-size:32px;letter-spacing:-.02em}
@@ -13,39 +13,36 @@
 .switch{font-size:.85rem;color:var(--muted);text-align:center}
 </style>
 </head><body>
-<header><div class="wrap nav"><a class="brand" href="/">VN<span>GO</span><small data-i18n="brand_tagline">越南在地行程设计</small></a><nav><a href="/#golf" data-i18n="nav_golf">高尔夫</a><a href="/#team" data-i18n="nav_team">企业团建</a><a href="/community/" data-i18n="nav_community">社区</a><a href="/#inquiry" class="nav-cta" data-i18n="nav_cta">定制行程</a></nav><div class="i18n-switcher" id="i18nSwitcher"></div></div></header>
-<div id="i18nSuggestBanner" class="i18n-suggest" hidden></div>
+<header><div class="wrap nav"><a class="brand" href="/">VN<span>GO</span><small>越南在地行程设计</small></a><nav><a href="/#golf">高尔夫</a><a href="/#team">企业团建</a><a href="/community/">社区</a><a href="/#inquiry" class="nav-cta">定制行程</a></nav></div></header>
 <main class="wrap auth-wrap">
-  <h1 data-i18n="login_h1">登录</h1>
-  <p class="hint" style="margin-bottom:20px" data-i18n="login_hint">用邮箱验证码登录，不用记密码。</p>
+  <h1>登录</h1>
+  <p class="hint" style="margin-bottom:20px">用邮箱验证码登录，不用记密码。</p>
   <div class="auth-box">
-    <button type="button" class="oauth" id="oauthGoogle" data-i18n="oauth_google">使用 Google 继续</button>
-    <button type="button" class="oauth alt" id="oauthApple" data-i18n="oauth_apple">使用 Apple 继续</button>
+    <button type="button" class="oauth" id="oauthGoogle">使用 Google 继续</button>
+    <button type="button" class="oauth alt" id="oauthApple">使用 Apple 继续</button>
     <p class="msg" id="oauthMsg"></p>
   </div>
-  <p class="hint" style="text-align:center;margin:16px 0" data-i18n="auth_or_hint">或使用邮箱验证码（备用）</p>
+  <p class="hint" style="text-align:center;margin:16px 0">或使用邮箱验证码（备用）</p>
   <form class="auth-box" id="step1Form">
     <div>
-      <label class="hint" for="email" data-i18n="email_label">邮箱</label>
+      <label class="hint" for="email">邮箱</label>
       <input id="email" name="email" type="email" required />
     </div>
-    <button type="submit" id="step1Btn" data-i18n="login_step1_btn">发送验证码</button>
+    <button type="submit" id="step1Btn">发送验证码</button>
     <p class="msg" id="step1Msg"></p>
   </form>
   <form class="auth-box" id="step2Form" style="display:none;margin-top:12px">
-    <p class="hint" data-i18n="code_sent_hint">验证码已发送到邮箱，5-10分钟内有效。</p>
+    <p class="hint">验证码已发送到邮箱，5-10分钟内有效。</p>
     <div>
-      <label class="hint" for="code" data-i18n="code_label">6位验证码</label>
+      <label class="hint" for="code">6位验证码</label>
       <input id="code" name="code" type="text" inputmode="numeric" required maxlength="8" />
     </div>
-    <button type="submit" id="step2Btn" data-i18n="login_step2_btn">验证并登录</button>
+    <button type="submit" id="step2Btn">验证并登录</button>
     <p class="msg" id="step2Msg"></p>
   </form>
-  <p class="switch" style="margin-top:14px"><span data-i18n="login_switch_text">还没有账号？</span><a href="/signup/" data-i18n="login_switch_link">去注册</a></p>
+  <p class="switch" style="margin-top:14px">还没有账号？<a href="/signup/">去注册</a></p>
 </main>
 <footer><div class="wrap"><div class="brand">VN<span>GO</span></div><p>© <span id="year"></span> VNGO.io</p></div></footer>
-<script src="/js/i18n-data.js"></script>
-<script src="/js/i18n.js" data-i18n-mode="overlay"></script>
 <script type="module">
   import { supabase } from '/js/supabase-client.js';
   (async () => {

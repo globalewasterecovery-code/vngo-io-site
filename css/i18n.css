@@ -1,0 +1,29 @@
+/* Generic multi-language UI — shared across Carbon sites. RTL-safe via logical properties. */
+.i18n-switcher{display:flex;align-items:center}
+.i18n-select{background:transparent;color:var(--text);border:1px solid var(--line);border-radius:.5rem;padding:.3rem .6rem;font-size:.8rem;cursor:pointer;font-family:inherit}
+.i18n-select:hover{border-color:var(--text)}
+.i18n-select option{background:#0b0d0f;color:#f2f0e9}
+
+.i18n-suggest{width:min(52rem,calc(100% - 2.4rem));margin:.8rem auto 0;display:flex;flex-wrap:wrap;align-items:center;gap:.7rem;padding:.7rem 1rem;border:1px solid var(--line);border-radius:.7rem;background:rgba(255,255,255,.03);font-size:.85rem}
+.i18n-suggest span{flex:1;min-width:12rem;color:var(--text)}
+.i18n-suggest button{border-radius:999px;padding:.35rem .9rem;font-size:.8rem;cursor:pointer;border:1px solid var(--line);background:transparent;color:var(--text);font-family:inherit}
+.i18n-suggest-accept{background:var(--text)!important;color:#0b0d0f!important;font-weight:600;border:0!important}
+
+/* RTL: mirror layout for Arabic and any future RTL locale, without
+   translating logic — [dir=rtl] flips reading direction, flex/grid order
+   inherits automatically since we use logical properties (gap, no
+   left/right margins) throughout the shared components. */
+[dir="rtl"] .topnav-inner{flex-direction:row-reverse}
+[dir="rtl"] .funnel{flex-direction:row-reverse}
+[dir="rtl"] .funnel-arrow{transform:scaleX(-1)}
+[dir="rtl"] .hero-ctas{flex-direction:row-reverse;justify-content:flex-end}
+[dir="rtl"] .i18n-suggest{flex-direction:row-reverse}
+[dir="rtl"] main.wrap,[dir="rtl"] .hero,[dir="rtl"] .funnel{text-align:right}
+
+/* Generic fallback RTL rules for sites that don't use the SoulEntropy class
+   names above (e.g. VNGO/VietChipHub/VietnamZiChan): flip the common nav
+   pattern and rely on the browser's default RTL text/box behavior for the
+   rest, so [dir=rtl] "just works" reasonably even without site-specific
+   overrides. */
+[dir="rtl"] .nav,[dir="rtl"] .topnav{flex-direction:row-reverse}
+[dir="rtl"] .actions,[dir="rtl"] .hero-ctas{flex-direction:row-reverse}
