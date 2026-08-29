@@ -2,7 +2,7 @@ DATE=2026-08-29
 AI_WORKER=Claude
 PROJECT=VNGO (vngo-build)
 BRANCH=main
-LAST_COMMIT=(pending — see COMPLETED below, this handoff is part of the commit being made)
+LAST_COMMIT=28ab86e
 COMPLETED=
 - Vendored the shared Carbon i18n runtime (js/i18n.js v2, css/i18n.css), built and verified first against SoulEntropy, generalized here with a new "overlay" mode: unlike SoulEntropy's per-locale pages, VNGO keeps ONE URL/locale (zh-CN, the site's real content locale) and swaps chrome text in place at runtime via data-i18n attributes. No new hreflang claims are made — this deliberately avoids the "thin duplicate SEO page" anti-pattern, since VNGO's long-form marketing copy (region descriptions, team-building narrative, FAQ answers, process steps) stays zh-CN-only for now.
 - Added data-i18n attributes to VNGO's high-value UI surfaces per the user's Phase-1 scope: nav (brand tagline, 高尔夫/企业团建/关于我们/社区/定制行程), hero (h1 both lines, intro, both CTA buttons, 3 trust bullets), stats band (3 items), all 6 section H2/H3 headings (golf/team/story/process/inquiry/faq) plus the inquiry note, footer tagline, and the full login/signup flow (h1, hint text, both OAuth buttons, the "or use email code" hint, email/code/display-name labels, the code-sent hint, both step buttons per page, the "don't have an account / already have an account" switch lines).
