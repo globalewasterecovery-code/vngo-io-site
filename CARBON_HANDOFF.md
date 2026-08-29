@@ -38,3 +38,9 @@ NEXT_ACTION=
 2. Live browser verification of all 5 forms once deployed (Netlify build + Supabase insert both landing correctly).
 3. See CARBON_TASK_QUEUE.json for delegated OpenClaw/Qwen follow-ups (test submissions, sitemap/health checks, git-safety push retries).
 SAFE_TO_CONTINUE=yes
+
+UPDATE_2026_08_29_SUPABASE=
+- Applied the security-hardened leads migration in the production Supabase dashboard after explicit user confirmation.
+- Before applying, removed the unsafe generic authenticated SELECT/UPDATE policies because community accounts share that role; commit 927dc29 records the hardened migration.
+- Independent verification query returned public.leads, 16 columns, RLS enabled, and exactly one policy: anon INSERT. No generic authenticated read/update access remains.
+- T11 is DONE. T09 remains pending until VNGO is pushed and deployed; no fabricated production lead was inserted during migration verification.
