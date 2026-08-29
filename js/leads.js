@@ -64,11 +64,17 @@ async function netlifySubmit(formName, fields) {
   var body = Object.keys(params)
     .map(function (k) { return encodeURIComponent(k) + '=' + encodeURIComponent(params[k] == null ? '' : params[k]); })
     .join('&');
-  var res = await fetch('/', {
+  // The public domain is proxied in front of Netlify, so posting to `/` returns
+  // the page but bypasses Netlify Forms. Send the fallback directly to the
+  // stable Netlify site origin. `no-cors` is intentional: this is a write-only
+  // backup channel and an opaque response still confirms the browser dispatched
+  // the request. Supabase remains the canonical, verifiable lead store.
+  var res = await fetch('https://vngo-io-site.netlify.app/', {
     method: 'POST',
+    mode: 'no-cors',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body: body,
   });
-  if (!res.ok) throw new Error('netlify submit failed: ' + res.status);
+  if (res.type !== 'opaque' && !res.ok) throw new Error('netlify submit failed: ' + res.status);
   return res;
 }
