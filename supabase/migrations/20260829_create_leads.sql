@@ -37,19 +37,9 @@ create policy "public can insert leads"
   to anon
   with check (true);
 
--- Authenticated staff (any logged-in Supabase user, e.g. via the existing
--- VNGO login/signup OTP+OAuth flow) may read/update leads for follow-up.
--- Tighten this later (e.g. to a specific admin role/table) once a real
--- staff-role concept exists — documented as a known v1 simplification.
+-- Do not grant read/update access to the generic authenticated role: community
+-- accounts use that role too. Leads remain manageable from the Supabase
+-- dashboard or a trusted server using the service role until a dedicated staff
+-- authorization model exists.
 drop policy if exists "authenticated can read leads" on public.leads;
-create policy "authenticated can read leads"
-  on public.leads for select
-  to authenticated
-  using (true);
-
 drop policy if exists "authenticated can update leads" on public.leads;
-create policy "authenticated can update leads"
-  on public.leads for update
-  to authenticated
-  using (true)
-  with check (true);
