@@ -1,0 +1,113 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>企业与机构合作 | VNGO Corporate / MICE</title><meta name="description" content="面向 HR/差旅负责人、海外旅行社、高尔夫球会与活动公司的越南团组出行合作入口。"><link rel="stylesheet" href="/assets/site.css"><link rel="stylesheet" href="/css/i18n.css">
+<style>
+.form-wrap{width:min(40rem,calc(100% - 40px));margin:0 auto;padding:48px 0}
+.form-wrap h1{margin:0 0 8px;font-size:28px;letter-spacing:-.02em}
+.form-wrap .lead{color:var(--muted);margin-bottom:24px}
+.form-wrap form{background:#fff;border:1px solid #dfe5e0;border-radius:16px;padding:24px;box-shadow:0 12px 30px rgba(16,37,30,.06);display:grid;gap:14px}
+.form-wrap label{display:block;font-size:.85rem;color:var(--ink)}
+.form-wrap input,.form-wrap select,.form-wrap textarea{width:100%;margin-top:6px;padding:11px;border-radius:8px;border:1px solid #cdd6d0;font:inherit}
+.form-wrap .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:640px){.form-wrap .two{grid-template-columns:1fr}}
+.form-wrap button[type=submit]{background:var(--green);color:#fff;border:none;border-radius:8px;padding:13px;font-weight:700;cursor:pointer}
+.form-wrap .msg{font-size:.85rem;min-height:1.1em}
+.form-wrap .note{font-size:.8rem;color:var(--muted)}
+.hide{position:absolute;left:-9999px}
+</style>
+</head><body>
+<header><div class="wrap nav"><a class="brand" href="/">VN<span>GO</span><small data-i18n="brand_tagline">越南在地行程设计</small></a><nav><a href="/#golf" data-i18n="nav_golf">高尔夫</a><a href="/#team" data-i18n="nav_team">企业团建</a><a href="/community/" data-i18n="nav_community">社区</a><a href="/#inquiry" class="nav-cta" data-i18n="nav_cta">定制行程</a></nav><div class="i18n-switcher" id="i18nSwitcher"></div></div></header>
+<div id="i18nSuggestBanner" class="i18n-suggest" hidden></div>
+<main class="wrap form-wrap">
+  <p class="eyebrow">MICE / CORPORATE</p>
+  <h1>企业与机构合作入口 / Corporate &amp; MICE Enquiry</h1>
+  <p class="lead">适合 HR/行政、差旅负责人、海外旅行社、高尔夫球会、活动公司等机构提交团组出行或活动需求。<br>For HR/Admin, travel planners, overseas agencies, golf clubs, and event companies planning group travel to Vietnam.</p>
+  <form id="corpForm" name="vngo-corporate" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+    <input type="hidden" name="form-name" value="vngo-corporate">
+    <p class="hide"><label>请勿填写 <input name="bot-field"></label></p>
+    <label>你的身份 / Your role<select name="role" id="roleSelect" required>
+      <option value="">请选择 / Select</option>
+      <option value="hr">HR / Admin</option>
+      <option value="planner">差旅负责人 Travel Planner</option>
+      <option value="agency">海外旅行社 Overseas Agency</option>
+      <option value="golf_club">高尔夫球会 Golf Club</option>
+      <option value="event_company">活动公司 Event Company</option>
+      <option value="other">其他 Other</option>
+    </select></label>
+    <div class="two">
+      <label>姓名 / Name<input name="name" required></label>
+      <label>国家/地区 / Country or Region<input name="country" required></label>
+    </div>
+    <div class="two">
+      <label>公司/机构 / Company or Organization<input name="company" required></label>
+      <label>联系渠道 / Contact channel<select name="channel" required>
+        <option value="">请选择 / Select</option>
+        <option value="wechat">微信 WeChat</option>
+        <option value="whatsapp">WhatsApp</option>
+        <option value="zalo">Zalo</option>
+        <option value="email">邮箱 Email</option>
+      </select></label>
+    </div>
+    <div class="two">
+      <label>联系账号 / Contact<input name="contact" required></label>
+      <label>预计人数 / Estimated group size<input type="number" name="people" min="1"></label>
+    </div>
+    <div class="two">
+      <label>预计日期 / Estimated date<input type="date" name="date"></label>
+      <label>预算范围 / Budget<select name="budget">
+        <option value="">请选择 / Select</option>
+        <option value="economy">经济舒适 Economy</option>
+        <option value="premium">高端品质 Premium</option>
+        <option value="luxury">尊享定制 Luxury</option>
+        <option value="undecided">希望先沟通 Let's discuss</option>
+      </select></label>
+    </div>
+    <label>需求说明 / What you need<textarea name="message" rows="4" placeholder="例如：为60人差旅团组安排高尔夫+晚宴 / 希望建立长期地接合作"></textarea></label>
+    <button type="submit" id="corpSubmitBtn">提交合作需求 / Submit Enquiry</button>
+    <p class="msg" id="corpMsg"></p>
+    <p class="note">我们会尽快通过你留下的方式联系，具体方案以需求沟通后确认为准。/ We'll reach out via your chosen channel; final plans are confirmed after discussion.</p>
+  </form>
+</main>
+<footer><div class="wrap"><div class="brand">VN<span>GO</span></div><p>© <span id="year"></span> VNGO.io</p></div></footer>
+<script src="/js/i18n-data.js"></script>
+<script src="/js/i18n.js" data-i18n-mode="overlay"></script>
+<script type="module">
+import { submitLead } from '/js/leads.js';
+const params = new URLSearchParams(window.location.search);
+const roleParam = params.get('role');
+if (roleParam) {
+  const sel = document.getElementById('roleSelect');
+  if ([...sel.options].some(o => o.value === roleParam)) sel.value = roleParam;
+}
+const form = document.getElementById('corpForm');
+const msg = document.getElementById('corpMsg');
+const btn = document.getElementById('corpSubmitBtn');
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  msg.textContent=''; msg.style.color='';
+  btn.disabled = true;
+  const fd = new FormData(form);
+  const netlifyFields = {};
+  fd.forEach((v,k)=>{ netlifyFields[k]=v; });
+  const notes = [];
+  notes.push('身份: ' + fd.get('role'));
+  notes.push('公司/机构: ' + fd.get('company'));
+  if (fd.get('message')) notes.push(fd.get('message'));
+  try {
+    const result = await submitLead({
+      formName: 'vngo-corporate',
+      netlifyFields,
+      fields: {
+        name: fd.get('name'), country: fd.get('country'),
+        contact_type: fd.get('channel'), contact_value: fd.get('contact'),
+        party_size: fd.get('people'), travel_date: fd.get('date'),
+        service_type: 'mice', budget_range: fd.get('budget'),
+        message: notes.join(' | '),
+      },
+    });
+    if (result.ok) { msg.textContent='提交成功，我们会尽快联系。/ Submitted — we will be in touch.'; msg.style.color='#1f7a4c'; form.reset(); }
+    else { msg.textContent='提交遇到问题，请直接联系我们。/ Please contact us directly.'; msg.style.color='#b23b3b'; }
+  } catch (err) { msg.textContent='提交遇到问题，请直接联系我们。/ Please contact us directly.'; msg.style.color='#b23b3b'; }
+  finally { btn.disabled = false; }
+});
+document.querySelector('#year').textContent = new Date().getFullYear();
+</script>
+</body></html>

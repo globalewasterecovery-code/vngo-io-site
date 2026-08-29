@@ -9,59 +9,9 @@
 <section id="story" class="section wrap story"><div><p class="eyebrow">WHY VNGO</p><h2 data-i18n="story_h2">把跨语言、跨城市的细节，变成一条能落地的行程</h2></div><div><p>VNGO 专注中文需求沟通、越南本地协调与行程落地。我们相信，高质量接待不是堆叠项目，而是先听清每个团队为什么出发，再组合合适的交通、场地、活动与休息时间。</p><p>我们不展示未经授权的客户故事，也不以虚构奖项替代信任。每一次合作从需求清单和可确认事项开始。</p></div></section>
 <section class="section process"><div class="wrap"><p class="eyebrow">HOW IT WORKS</p><h2 data-i18n="process_h2">从一句想法，到可执行清单</h2><ol><li><b>需求对齐</b><span>目的地、日期、人数、偏好与预算范围</span></li><li><b>框架提案</b><span>行程节奏、球场或活动模块、交通逻辑</span></li><li><b>逐项确认</b><span>以实际可订资源为准，确认后形成执行版</span></li><li><b>本地落地</b><span>中文沟通与在地协调贯穿关键节点</span></li></ol></div></section>
 <section id="inquiry" class="section wrap inquiry"><div><p class="eyebrow">START A CONVERSATION</p><h2 data-i18n="inquiry_h2">先告诉我们，你想让这趟越南之行解决什么。</h2><p data-i18n="inquiry_note">扫描下方二维码，直接添加 WhatsApp、微信或 Zalo 联系我们；也可以填写表单留下偏好的联系渠道。</p><div class="channels"><div class="channel"><img src="/assets/contact/whatsapp_qr.jpg" alt="WhatsApp 联系二维码" loading="lazy" width="88" height="88"><div><b>WhatsApp</b><span>扫码，或<a href="https://wa.me/qr/U75I34THOJQ4I1" target="_blank" rel="noopener">点击直接开聊</a></span></div></div><div class="channel"><img src="/assets/contact/wechat_qr.jpg" alt="微信联系二维码" loading="lazy" width="88" height="88"><div><b>微信</b><span>扫码添加</span></div></div><div class="channel"><img src="/assets/contact/zalo_qr.jpg" alt="Zalo 联系二维码" loading="lazy" width="88" height="88"><div><b>Zalo</b><span>扫码，或<a href="http://zaloapp.com/qr/p/u7qwhu2ybke9" target="_blank" rel="noopener">点击直接开聊</a></span></div></div></div></div>
-<form id="form" name="vngo-consult" method="POST" data-netlify="true" netlify-honeypot="bot-field"><input type="hidden" name="form-name" value="vngo-consult"><p class="hide"><label>请勿填写 <input name="bot-field"></label></p><div class="two"><label>姓名 / Name<input name="name" required></label><label>国家/地区 / Country or Region<input name="country" required placeholder="例如：中国大陆 / Singapore / USA"></label></div><div class="two"><label>首选联系渠道 / Contact channel<select name="channel" required><option value="">请选择 / Select</option><option value="wechat">微信 WeChat</option><option value="whatsapp">WhatsApp</option><option value="zalo">Zalo</option><option value="email">邮箱 Email</option></select></label><label>联系账号 / Contact<input name="contact" required placeholder="微信号 / 电话 / 邮箱"></label></div><div class="two"><label>出行人数 / Travelers<input type="number" name="people" min="1" required></label><label>预计出行日期 / Estimated date<input type="date" name="arrival_date" required></label></div><div class="two"><label>主要需求 / Main need<select name="service" required><option value="">请选择 / Select</option><option value="golf">高尔夫旅行 Golf</option><option value="team_building">企业团建 Team Building</option><option value="ground_service">高端地接 Ground Service</option><option value="business_reception">商务接待 Business Reception</option><option value="mice">MICE / 企业差旅 Corporate</option><option value="other">其他 Other</option></select></label><label>预算范围 / Budget range<select name="budget" required><option value="">请选择 / Select</option><option value="economy">经济舒适 Economy</option><option value="premium">高端品质 Premium</option><option value="luxury">尊享定制 Luxury</option><option value="undecided">希望先沟通 Let's discuss</option></select></label></div><div class="two"><label>公司 / 团队（选填）<input name="company"></label><label>目的地（选填）<input name="destination" placeholder="胡志明市 / 岘港 / 河内…"></label></div><label>备注（选填）<textarea name="message" rows="4" placeholder="例如：希望安排两场球、需要中文领队、团队有素食成员…"></textarea></label><button class="btn primary" type="submit" id="quoteSubmitBtn">提交定制需求 / Get a Quote</button><p class="msg" id="quoteMsg" style="min-height:1.2em;font-size:.85rem"></p><small>提交后，我们会按你留下的方式联系。请勿在备注中填写证件或支付信息。</small></form></section>
+<form id="form" name="vngo-consult" method="POST" data-netlify="true" netlify-honeypot="bot-field"><input type="hidden" name="form-name" value="vngo-consult"><p class="hide"><label>请勿填写 <input name="bot-field"></label></p><div class="two"><label>姓名<input name="name" required></label><label>公司 / 团队<input name="company"></label></div><div class="two"><label>首选联系渠道<select name="channel" required><option value="">请选择</option><option>微信</option><option>WhatsApp</option><option>Zalo</option><option>邮箱</option></select></label><label>联系账号<input name="contact" required placeholder="微信号 / 电话 / 邮箱"></label></div><div class="two"><label>服务类型<select name="service" required><option>高尔夫旅行</option><option>企业团建</option><option>高端地接</option><option>商务接待</option><option>其他</option></select></label><label>目的地<input name="destination" placeholder="胡志明市 / 岘港 / 河内…"></label></div><div class="three"><label>到达日期<input type="date" name="arrival_date"></label><label>天数<input type="number" name="days" min="1"></label><label>人数<input type="number" name="people" min="1"></label></div><label>预算范围<select name="budget"><option value="">暂未确定</option><option>经济舒适</option><option>高端品质</option><option>尊享定制</option><option>希望先沟通</option></select></label><label>备注<textarea name="message" rows="5" placeholder="例如：希望安排两场球、需要中文领队、团队有素食成员…"></textarea></label><button class="btn primary" type="submit">提交定制需求</button><small>提交后，我们会按你留下的方式联系。请勿在备注中填写证件或支付信息。</small></form></section>
 <section class="section faq wrap"><p class="eyebrow">FAQ</p><h2 data-i18n="faq_h2">开始前，你可能想知道</h2><details><summary>页面上的路线可以直接购买吗？</summary><p>它们是沟通框架，不是固定套餐。我们会根据日期、人数和实际可订资源给出确认版。</p></details><details><summary>可以只安排球场或车辆吗？</summary><p>可以在表单中写明单项需求，我们会先确认是否能够在对应城市和日期协调。</p></details><details><summary>是否有真实客户案例？</summary><p>本页没有使用未经授权的客户案例。若未来展示案例，会以明确授权和可核实信息为前提。</p></details></section>
 <section class="links"><div class="wrap"><a href="/pages/vietnam-mobile-internet">越南随身上网</a><a href="/pages/travel-platforms-vietnam">平台评价入口</a><a href="/content/">越南旅游资讯</a></div></section></main>
-<section class="section wrap quick-actions" style="text-align:center"><p class="eyebrow">START HERE</p><h2>选择最贴近你需求的入口 / Choose the fastest way to start</h2><div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:20px"><a class="btn primary" href="#inquiry">Get a Quote</a><a class="btn ghost" href="#golf">Plan My Vietnam Trip</a><a class="btn ghost" href="/golf-quote/">Plan Corporate Golf</a><a class="btn ghost" href="/team-building/">Plan Team Building</a><a class="btn ghost" href="/partner/">Partner With Us</a></div></section>
-<section id="corporate" class="section dark"><div class="wrap"><p class="eyebrow">MICE / CORPORATE</p><h2>企业与机构合作入口 / For organizations planning group travel</h2><p>无论你是企业行政、差旅负责人、海外旅行社、高尔夫球会还是活动公司，都可以从这里提交需求。</p><div class="tags" style="margin-top:16px"><a href="/corporate/?role=hr" class="btn ghost">HR / Admin</a> <a href="/corporate/?role=planner" class="btn ghost">Travel Planner</a> <a href="/corporate/?role=agency" class="btn ghost">Overseas Agency</a> <a href="/corporate/?role=golf_club" class="btn ghost">Golf Club</a> <a href="/corporate/?role=event_company" class="btn ghost">Event Company</a></div></div></section>
 <footer><div class="wrap"><div class="brand">VN<span>GO</span></div><p data-i18n="footer_tagline">越南高端地接 · 高尔夫旅行 · 企业团建</p><p>© <span id="year"></span> VNGO.io</p></div></footer>
 <script src="/js/i18n-data.js"></script><script src="/js/i18n.js" data-i18n-mode="overlay"></script>
-<script>const b=document.querySelector('.menu'),n=document.querySelector('nav');b.onclick=()=>{const o=n.classList.toggle('open');b.setAttribute('aria-expanded',o)};document.querySelectorAll('nav a').forEach(a=>a.onclick=()=>n.classList.remove('open'));document.querySelector('#year').textContent=new Date().getFullYear();</script>
-<script type="module">
-import { submitLead } from '/js/leads.js';
-const qForm = document.getElementById('form');
-const qMsg = document.getElementById('quoteMsg');
-const qBtn = document.getElementById('quoteSubmitBtn');
-qForm.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  qMsg.textContent = ''; qMsg.style.color = '';
-  qBtn.disabled = true;
-  const fd = new FormData(qForm);
-  const netlifyFields = {};
-  fd.forEach((v, k) => { netlifyFields[k] = v; });
-  const extra = [];
-  if (fd.get('company')) extra.push('公司/团队: ' + fd.get('company'));
-  if (fd.get('destination')) extra.push('目的地: ' + fd.get('destination'));
-  if (fd.get('message')) extra.push(fd.get('message'));
-  try {
-    const result = await submitLead({
-      formName: 'vngo-consult',
-      netlifyFields,
-      fields: {
-        name: fd.get('name'),
-        country: fd.get('country'),
-        contact_type: fd.get('channel'),
-        contact_value: fd.get('contact'),
-        party_size: fd.get('people'),
-        travel_date: fd.get('arrival_date'),
-        service_type: fd.get('service'),
-        budget_range: fd.get('budget'),
-        message: extra.join(' | '),
-      },
-    });
-    if (result.ok) {
-      qMsg.textContent = '提交成功，我们会尽快通过你留下的方式联系你。/ Submitted — we will contact you shortly.';
-      qMsg.style.color = '#1f7a4c';
-      qForm.reset();
-    } else {
-      qMsg.textContent = '提交遇到问题，请直接通过 WhatsApp / 微信 / Zalo 联系我们。';
-      qMsg.style.color = '#b23b3b';
-    }
-  } catch (err) {
-    qMsg.textContent = '提交遇到问题，请直接通过 WhatsApp / 微信 / Zalo 联系我们。';
-    qMsg.style.color = '#b23b3b';
-  } finally {
-    qBtn.disabled = false;
-  }
-});
-</script></body></html>
+<script>const b=document.querySelector('.menu'),n=document.querySelector('nav');b.onclick=()=>{const o=n.classList.toggle('open');b.setAttribute('aria-expanded',o)};document.querySelectorAll('nav a').forEach(a=>a.onclick=()=>n.classList.remove('open'));document.querySelector('#year').textContent=new Date().getFullYear();</script></body></html>

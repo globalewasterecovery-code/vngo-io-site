@@ -4,7 +4,9 @@
     "page": "events",
     "source_locale": "zh-CN",
     "target_locale": "zh-TW,en,vi,id,ar,ja,ko,th,ms,es,pt,fr,de,hi",
-    "missing_keys": ["*entire page — not yet templated for i18n"],
+    "missing_keys": [
+      "*entire page — not yet templated for i18n"
+    ],
     "priority": "P3",
     "status": "pending"
   },
@@ -13,7 +15,9 @@
     "page": "resources",
     "source_locale": "zh-CN",
     "target_locale": "zh-TW,en,vi,id,ar,ja,ko,th,ms,es,pt,fr,de,hi",
-    "missing_keys": ["*entire page — not yet templated for i18n"],
+    "missing_keys": [
+      "*entire page — not yet templated for i18n"
+    ],
     "priority": "P3",
     "status": "pending"
   },
@@ -22,7 +26,9 @@
     "page": "contact",
     "source_locale": "zh-CN",
     "target_locale": "zh-TW,en,vi,id,ar,ja,ko,th,ms,es,pt,fr,de,hi",
-    "missing_keys": ["*entire page — not yet templated for i18n"],
+    "missing_keys": [
+      "*entire page — not yet templated for i18n"
+    ],
     "priority": "P3",
     "status": "pending"
   },
@@ -31,7 +37,9 @@
     "page": "manifesto",
     "source_locale": "zh-CN",
     "target_locale": "zh-TW,en,vi,id,ar,ja,ko,th,ms,es,pt,fr,de,hi",
-    "missing_keys": ["*entire page — not yet templated for i18n"],
+    "missing_keys": [
+      "*entire page — not yet templated for i18n"
+    ],
     "priority": "P3",
     "status": "pending"
   },
@@ -40,7 +48,16 @@
     "page": "index (long-form sections)",
     "source_locale": "zh-CN",
     "target_locale": "zh-TW,en,vi,ko,ja,th,id,ms,hi,ar",
-    "missing_keys": ["golf_lead", "team_modules_p", "story_p1", "story_p2", "process step descriptions (4)", "faq answers (3)", "region descriptions (3)", "framework itinerary blurbs (3)"],
+    "missing_keys": [
+      "golf_lead",
+      "team_modules_p",
+      "story_p1",
+      "story_p2",
+      "process step descriptions (4)",
+      "faq answers (3)",
+      "region descriptions (3)",
+      "framework itinerary blurbs (3)"
+    ],
     "priority": "P3",
     "status": "pending"
   },
@@ -49,7 +66,13 @@
     "page": "index (lead-capture form)",
     "source_locale": "zh-CN",
     "target_locale": "zh-TW,en,vi,ko,ja,th,id,ms,hi,ar",
-    "missing_keys": ["channel options (微信/WhatsApp/Zalo/邮箱)", "service options (5)", "budget options (4)", "field labels (姓名/公司/联系账号/目的地/到达日期/天数/人数/备注)", "submit button + disclaimer"],
+    "missing_keys": [
+      "channel options (微信/WhatsApp/Zalo/邮箱)",
+      "service options (5)",
+      "budget options (4)",
+      "field labels (姓名/公司/联系账号/目的地/到达日期/天数/人数/备注)",
+      "submit button + disclaimer"
+    ],
     "priority": "P3",
     "status": "pending",
     "note": "BLOCKED until value= attributes are added to <option> elements (see VNGO CARBON_HANDOFF.md) — translating the visible text first would corrupt submitted lead data."
@@ -59,7 +82,14 @@
     "page": "login+signup (dynamic auth messages)",
     "source_locale": "zh-CN",
     "target_locale": "zh-TW,en,vi,ko,ja,th,id,ms,hi,ar",
-    "missing_keys": ["登录失败:", "发送失败:", "验证码已发送，请查收邮箱。", "验证失败:", "登录成功，正在跳转…", "加入成功！正在跳转…"],
+    "missing_keys": [
+      "登录失败:",
+      "发送失败:",
+      "验证码已发送，请查收邮箱。",
+      "验证失败:",
+      "登录成功，正在跳转…",
+      "加入成功！正在跳转…"
+    ],
     "priority": "P4",
     "status": "pending",
     "note": "Lives inside working OTP/OAuth JS logic — treat as a careful refactor, not a text swap."
@@ -69,17 +99,21 @@
     "page": "all pages (generator locale set)",
     "source_locale": "vi",
     "target_locale": "zh-TW,ko,ja",
-    "missing_keys": ["*entire locale — scripts/generate_site.py LANGUAGES dict only defines zh/vi/en today"],
+    "missing_keys": [
+      "*entire locale — scripts/generate_site.py LANGUAGES dict only defines zh/vi/en today"
+    ],
     "priority": "P4",
-    "status": "pending",
-    "note": "Generator-level task: extend LANGUAGES + UI dict + per-locale content pipeline, not a strings.json edit."
+    "status": "blocked",
+    "note": "Generator-level task: extend LANGUAGES + UI dict + per-locale content pipeline, not a strings.json edit. RISK FOUND 2026-08-29: build_portal.py has 10+ scattered per-language dict literals beyond LANGS/UI (lines ~390-480) — adding a locale without updating every one crashes with KeyError. Recommend a t(lang,key,table) consolidation refactor before this extension. See VietnamZiChan CARBON_HANDOFF.md Update 2026-08-29."
   },
   {
     "site": "vietchiphub",
     "page": "all pages (generator locale set)",
     "source_locale": "vi",
     "target_locale": "ko,ja",
-    "missing_keys": ["*entire locale — build_site.py's localized_page() only defines vi/en labels today"],
+    "missing_keys": [
+      "*entire locale — build_site.py's localized_page() only defines vi/en labels today"
+    ],
     "priority": "P5",
     "status": "pending"
   },
@@ -88,9 +122,11 @@
     "page": "all pages (persistence runtime)",
     "source_locale": "n/a",
     "target_locale": "n/a",
-    "missing_keys": ["shared lang-persist script not yet wired into any of the ~5 page-shell builders"],
+    "missing_keys": [
+      "shared lang-persist script not yet wired into any of the ~5 page-shell builders"
+    ],
     "priority": "P3",
-    "status": "pending",
-    "note": "See VietChipHub CARBON_HANDOFF.md NEXT_ACTION for the exact scoped patch (mirrors VietnamZiChan's already-shipped fix)."
+    "status": "done",
+    "note": "Shipped 2026-08-29, commit cce99d8 (lang-persist.js wired into footer()/foot shared builders across all ~96 generated pages). Verified via regeneration + scoped diff + isolated unit test."
   }
 ]
