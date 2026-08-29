@@ -44,3 +44,10 @@ UPDATE_2026_08_29_SUPABASE=
 - Before applying, removed the unsafe generic authenticated SELECT/UPDATE policies because community accounts share that role; commit 927dc29 records the hardened migration.
 - Independent verification query returned public.leads, 16 columns, RLS enabled, and exactly one policy: anon INSERT. No generic authenticated read/update access remains.
 - T11 is DONE. T09 remains pending until VNGO is pushed and deployed; no fabricated production lead was inserted during migration verification.
+
+UPDATE_2026_08_29_LEADS_HARDENING=
+- Applied supabase/migrations/20260829_harden_leads.sql after explicit user confirmation.
+- Added 11 new-write constraints for source/language/country/name/contact/party-size/service/budget/message bounds; existing rows were preserved with NOT VALID constraints while new rows are enforced immediately.
+- Replaced the anon policy with a strict check requiring site='vngo' and status='new'.
+- Independent pg_catalog verification returned RLS=true, 13 named constraints total (11 new bounds plus the existing key/status constraints), and exactly one anon INSERT policy with the expected site/status condition.
+- Client js/leads.js now trims and bounds text consistently; commit 993eaf3. No production test lead was inserted.
